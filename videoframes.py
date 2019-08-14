@@ -1,17 +1,15 @@
-import cv2 
-import time
-  
-# Function to extract frames 
-def FrameCapture(path): 
-      
-    # Path to video file 
-    vidObj = cv2.VideoCapture(path) 
-  
-    # Used as counter variable 
-    count = 0
-  
+import cv2, pafy  
 
-    # checks whether frames were extracted 
+
+def FrameCapture(url): 
+    # Path to video file 
+    # url = 'https://youtu.be/W1yKqFZ34y4'
+    vPafy = pafy.new(url)
+    play = vPafy.getbest(preftype="webm")
+    vidObj = cv2.VideoCapture(play.url) 
+
+
+    count = 0
     success = 1
   
     while success: 
@@ -19,12 +17,13 @@ def FrameCapture(path):
         # vidObj object calls read 
         # function extract frames 
         success, image = vidObj.read()   
-        # Saves the frames with frame-count 
+
         if count%30==0:
             cv2.imwrite("Videoframes/frame%d.jpg" % count, image)
+            
         count += 1
   
-# Driver Code 
 if __name__ == '__main__':
-    # Calling the function 
-    FrameCapture("C:/Users/alans/Desktop/20190127_123021.mp4")
+    FrameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
+
+
