@@ -1,7 +1,7 @@
 import cv2, pafy  
 
 
-def FrameCapture(url): 
+def frameCapture(url): 
     # Path to video file 
     # url = 'https://youtu.be/W1yKqFZ34y4'
     vPafy = pafy.new(url)
@@ -23,7 +23,7 @@ def FrameCapture(url):
             
         count += 1
   
-if __name__ == '__main__':
-    FrameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
+# if __name__ == '__main__':
+#     frameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
 
 
