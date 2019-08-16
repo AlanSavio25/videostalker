@@ -19,7 +19,7 @@ def frameCapture(url):
         success, image = vidObj.read()   
 
         if count%30==0:
-            cv2.imwrite("Videoframes/frame%d.jpg" % count, image)
+            cv2.imwrite("../Videoframes/frame%d.jpg" % count, image)
             
         count += 1
   
