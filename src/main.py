@@ -72,11 +72,11 @@ def writeJsonDatatoFile(jsonData):
 		json.dump(jsonData, outfile)
 
 
-if __name__ == '__main__':
-	vals = connectToFaceAPI('b8ea8ee7334149cebd7ed530acdf84d7')
-	faces = getFaceResponse('https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect', 'C:/Users/alans/Desktop/29664935_1826046541029897_4816426771371512794_o.jpg', vals[0], vals[1])
-	jsonData = frameAverage(faces)
-	pprint(jsonData)
+# if __name__ == '__main__':
+	# vals = connectToFaceAPI('b8ea8ee7334149cebd7ed530acdf84d7')
+	# faces = getFaceResponse('https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect', 'C:/Users/alans/Desktop/29664935_1826046541029897_4816426771371512794_o.jpg', vals[0], vals[1])
+	# jsonData = frameAverage(faces)
+	# pprint(jsonData)
 	# writeJsonDatatoFile(jsonData)
 	# videoframes.frameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
 

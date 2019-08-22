@@ -14,11 +14,11 @@ vi = VideoIndexer(
 )
 #Upload video to indexer
 
-# video_id = vi.upload_to_video_indexer(
-#     input_filename="The secrets to decoding facial expressions.mp4",
-#     video_name="video1",
-#     video_language="English",
-# )
+video_id = vi.upload_to_video_indexer(
+    input_filename="https://www.youtube.com/watch?v=oPpzJAzdpTU",
+    video_name="video1",
+    video_language="English",
+)
 
 #Get video info from indexer
 

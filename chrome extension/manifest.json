@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "manifest_version": 2,
 
@@ -10,7 +9,8 @@
    "default_popup": "popup.html"
   },
   "permissions": [
-   "activeTab"
+   "activeTab",
+   "http://localhost/*"
    ],
   "content_scripts": [
   {
@@ -20,27 +20,4 @@
     "js": ["jquery-2.1.3.min.js", "content.js"]
   }
 ]
-=======
-{
-  "manifest_version": 2,
-
-  "name": "Video Stalker",
-  "description": "This extension will give you reports based on the videos you've watched",
-  "version": "1.0",
-
-  "browser_action": {
-   "default_popup": "popup.html"
-  },
-  "permissions": [
-   "activeTab"
-   ],
-  "content_scripts": [
-  {
-    "matches": [
-      "https://www.youtube.com/*", "https://youtube.com/*"
-    ],
-    "js": ["jquery-2.1.3.min.js", "content.js"]
-  }
-]
->>>>>>> 5bb79606953cd0b89a3dacedf1ae6ab54bef007d
 }
