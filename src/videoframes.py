@@ -4,10 +4,14 @@ import cv2, pafy
 def frameCapture(url): 
     # Path to video file 
     # url = 'https://youtu.be/W1yKqFZ34y4'
-    vPafy = pafy.new(url)
-    play = vPafy.getbest(preftype="webm")
-    vidObj = cv2.VideoCapture(play.url) 
-
+    # vPafy = pafy.new(url)
+    # play = vPafy.getbest(preftype="webm")
+    # vidObj = cv2.VideoCapture(play.url) 
+    video = pafy.new(url)
+    print(video.title)
+    best = video.getbest(preftype="mp4")
+    capture = cv2.VideoCapture()
+    capture.open(best.url)
 
     count = 0
     success = 1
@@ -16,14 +20,14 @@ def frameCapture(url):
     
         # vidObj object calls read 
         # function extract frames 
-        success, image = vidObj.read()   
+        success, image = capture.read()   
 
-        if count%30==0:
-            cv2.imwrite("../Videoframes/frame%d.jpg" % count, image)
+        if count%100==0:
+            cv2.imwrite("frames/frame%d.jpg" % count, image)
             
         count += 1
   
 # if __name__ == '__main__':
 #     frameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
 
-
+frameCapture("https://www.youtube.com/watch?v=NrJEFrth27Q")

@@ -57,7 +57,6 @@ def frameAverage(faces):
 		jsonData['hair']['bald'] += fa['hair']['bald']
 		smile += fa['smile']
 
-
 	jsonData['age'] = age/len(faces)  #average age of all faces in a single frame
 	for em in jsonData['emotion']:
 		jsonData['emotion'][em] = jsonData['emotion'][em]/len(faces)
