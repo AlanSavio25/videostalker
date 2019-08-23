@@ -1,4 +1,5 @@
 function processImage() {
+    alert(window.location.href)
     // Replace <Subscription Key> with your valid subscription key.
     var subscriptionKey = "b8ea8ee7334149cebd7ed530acdf84d7";
 
