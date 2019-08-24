@@ -16,7 +16,6 @@ import os
 
 def connectToFaceAPI(subscription_key):
 	assert subscription_key
-	print("Hello")
 	headers = {'Content-Type': 'application/octet-stream','Ocp-Apim-Subscription-Key': subscription_key}
 	params = {
 		'returnFaceId': 'true',
@@ -47,7 +46,6 @@ def loopdir(rootdir):
             filepath = subdir + os.sep + file
             if filepath.endswith(".jpg"):
                filenames.append(filepath)
-               print("Filename is: " + filepath)
     return filenames
 
 def frameAverage(faces):
