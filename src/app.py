@@ -1,7 +1,8 @@
 from flask import Flask, redirect, request
 import main
-import VideoIndexerAPI
-import videoframes
+# import videoframes
+import time
+from time import sleep
 
 app = Flask(__name__)
 
@@ -16,7 +17,22 @@ def face():
 
 @app.route("/average")
 def average():
-  finalJson = main.frameAverage(jsonContainingEveryFrameJson)
+  filenames = main.loopdir("C:/Users/alans/Desktop/MicrosoftAzure/videostalker/src")
+  print(filenames)
+  vals = main.connectToFaceAPI('b8ea8ee7334149cebd7ed530acdf84d7')
+
+  data = []
+  totalData = []
+  for file in filenames:
+    faces = main.getFaceResponse('https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect', file, vals[0], vals[1])
+    data.append(faces)
+    time.sleep(3)
+  
+  for i in data:
+    picdata = main.frameAverage(i)
+    totalData.append(picdata)
+  finalJson = main.overallAverage(totalData)
+  return str(finalJson)
 
 @app.route("/video-indexer")
 def s():

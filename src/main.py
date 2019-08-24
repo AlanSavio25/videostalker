@@ -8,7 +8,10 @@ from io import BytesIO
 from pprint import pprint
 import json
 import statistics as st
-import videoframes
+# import videoframes
+import time
+from time import sleep
+import os
 
 
 def connectToFaceAPI(subscription_key):
@@ -27,6 +30,25 @@ def getFaceResponse(face_api_url, image, headers, params):
 	response  = requests.post(face_api_url,params=params, headers=headers,  data=img)
 	faces = response.json()
 	return faces
+
+# def loopdir(rootdir):
+#     filenames = []
+#     for subdir, dirs, files in os.walk(rootdir):
+# 	for file in files:
+# 		filepath = subdir + os.sep + file
+# 		if filepath.endswith(".jpg"):
+# 			filenames.append(filepath)
+# 	return filenames
+	
+def loopdir(rootdir):
+    filenames = []
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:
+            filepath = subdir + os.sep + file
+            if filepath.endswith(".jpg"):
+               filenames.append(filepath)
+               print("Filename is: " + filepath)
+    return filenames
 
 def frameAverage(faces):
 	jsonData = {}
@@ -66,9 +88,70 @@ def frameAverage(faces):
 	jsonData['smile'] = smile/len(faces)
 	return jsonData
 
-def writeJsonDatatoFile(jsonData):
-	with open('data.json', 'w') as outfile:
-		json.dump(jsonData, outfile)
+# print(totalData)
+def overallAverage(faces):
+	
+    jsonData = {}
+    jsonData['emotion'] = {
+        'anger': 0.0,
+        'contempt': 0.0,
+        'disgust': 0.0,
+        'fear': 0.0,
+        'happiness': 0.0,
+        'neutral': 0.0,
+        'sadness': 0.0,
+        'surprise': 0.0
+    }
+    jsonData['facialHair'] = {'beard': 0.0, 'moustache': 0.0, 'sideburns': 0.0}
+    jsonData['hair'] = {'bald': 0.0, 'hairColor': ''}
+
+    age = 0
+    smile = 0
+    # pprint(faces)
+
+    for face in faces:
+        fa = face
+        age += fa['age']
+        for em in fa['emotion']:
+            jsonData['emotion'][em] += fa['emotion'][em]
+        for hair in fa['facialHair']:
+            jsonData['facialHair'][hair] += fa['facialHair'][hair]
+        jsonData['hair']['bald'] += fa['hair']['bald']
+        smile += fa['smile']
+
+    # average age of all faces in a single frame
+    jsonData['age'] = age/len(faces)
+    for em in jsonData['emotion']:
+        jsonData['emotion'][em] = jsonData['emotion'][em]/len(faces)
+    for hair in fa['facialHair']:
+        jsonData['facialHair'][hair] = jsonData['facialHair'][hair]/len(faces)
+    jsonData['hair']['bald'] /= len(faces)
+    jsonData['smile'] = smile/len(faces)
+    return jsonData
+    for face in faces:
+        fa = face
+        age += fa['age']
+        for em in fa['emotion']:
+            jsonData['emotion'][em] += fa['emotion'][em]
+        for hair in fa['facialHair']:
+            jsonData['facialHair'][hair] += fa['facialHair'][hair]
+        jsonData['hair']['bald'] += fa['hair']['bald']
+        smile += fa['smile']
+
+    # average age of all faces in a single frame
+    jsonData['age'] = age/len(faces)
+    for em in jsonData['emotion']:
+        jsonData['emotion'][em] = jsonData['emotion'][em]/len(faces)
+    for hair in fa['facialHair']:
+        jsonData['facialHair'][hair] = jsonData['facialHair'][hair]/len(faces)
+    jsonData['hair']['bald'] /= len(faces)
+    jsonData['smile'] = smile/len(faces)
+    return jsonData
+
+
+# def writeJsonDatatoFile(jsonData):
+# 	with open('data.json', 'w') as outfile:
+# 		json.dump(jsonData, outfile)
 
 
 # if __name__ == '__main__':

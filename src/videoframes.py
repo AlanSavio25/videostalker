@@ -8,7 +8,6 @@ def frameCapture(url):
     # play = vPafy.getbest(preftype="webm")
     # vidObj = cv2.VideoCapture(play.url) 
     video = pafy.new(url)
-    print(video.title)
     best = video.getbest(preftype="mp4")
     capture = cv2.VideoCapture()
     capture.open(best.url)
@@ -30,4 +29,4 @@ def frameCapture(url):
 # if __name__ == '__main__':
 #     frameCapture("https://www.youtube.com/watch?v=W1yKqFZ34y4&feature=youtu.be")
 
-frameCapture("https://www.youtube.com/watch?v=NrJEFrth27Q")
+# frameCapture("https://www.youtube.com/watch?v=NrJEFrth27Q")
