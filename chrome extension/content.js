@@ -1,8 +1,11 @@
-alert("You're on a Youtube page link!")
-// var firstHref = $("a[href^='http']").eq(0).attr("href");
-// var secondhref = $("a[href^='http']").eq(1).attr("href");
-// console.log(firstHref);
-chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    var url = tabs[0].url;
-    alert("content "+ url)
-});
+alert("You're on a Youtube page link!!!")
+var youtubelink = window.location.toString()
+
+$.ajax({
+  url: "http://127.0.0.1:5000/videoframe" + "?link=" + youtubelink,
+  data : youtubelink,
+  type: "POST",  
+  success: function(res) {
+    console.log(res)
+  }
+})

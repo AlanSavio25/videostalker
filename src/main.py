@@ -105,7 +105,8 @@ def overallAverage(faces):
 
     age = 0
     smile = 0
-    # pprint(faces)
+    if len(faces)==0:
+      return jsonData
 
     for face in faces:
         fa = face
