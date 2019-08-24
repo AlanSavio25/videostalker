@@ -8,7 +8,7 @@ def frameCapture(url):
     # vPafy = pafy.new(url)
     # play = vPafy.getbest(preftype="webm")
     # vidObj = cv2.VideoCapture(play.url) 
-    dir = "C:/Users/alans/Desktop/MicrosoftAzure/videostalker/frames/"
+    dir = "C:/Users/alans/Desktop/MicrosoftAzure/videostalker/src/frames/"
     if os.path.exists(dir):
         print("File does exist!")
         shutil.rmtree(dir)

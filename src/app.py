@@ -6,7 +6,7 @@ from time import sleep
 
 app = Flask(__name__)
 
-@app.route("/average")
+@app.route("/average", methods = ['GET', 'POST'])
 def average():
   print("Video frames ready")
   print("Starting averaging...")
@@ -28,15 +28,20 @@ def average():
     picdata = main.frameAverage(i)
     totalData.append(picdata)
   finalJson = main.overallAverage(totalData)
+  print(finalJson)
   return str(finalJson)
 
 @app.route("/videoframe", methods = ['GET', 'POST'])
 def videoframe():
   if request.method == 'GET':
-    videoframes.frameCapture("https://www.youtube.com/watch?v=wjIes1eGAw4")
+    # videoframes.frameCapture("https://www.youtube.com/watch?v=wjIes1eGAw4")
     return redirect('/average')
-  if request.method == 'POST'
-    print("Your POST request is: " + request)
+  if request.method == 'POST':
+    s = ("Your POST request is: " + str(request.data))
+    url = request.args['link']
+    print("URL is: " + url)
+    videoframes.frameCapture(url)
+    return redirect('/average')
 
 if __name__ == "__main__":
     app.run(debug=True)
