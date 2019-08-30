@@ -1,4 +1,3 @@
-alert("You're on a Youtube page link!!!")
 var youtubelink = window.location.toString()
 
 $.ajax({

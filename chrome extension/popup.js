@@ -1,5 +1,4 @@
 function processImage() {
-    alert(window.location.href)
     // Replace <Subscription Key> with your valid subscription key.
     var subscriptionKey = "b8ea8ee7334149cebd7ed530acdf84d7";
 
@@ -79,7 +78,5 @@ function processImage() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var analyse = document.getElementById('analyse_button');
-    analyse.addEventListener('click', function() {
-        processImage();
-    })
+   
 });
