@@ -1,85 +1,19 @@
-function processImage() {
-    alert(window.location.href)
-    // Replace <Subscription Key> with your valid subscription key.
-    var subscriptionKey = "b8ea8ee7334149cebd7ed530acdf84d7";
-
-    // NOTE: You must use the same region in your REST call as you used to
-    // obtain your subscription keys. For example, if you obtained your
-    // subscription keys from westus, replace "westcentralus" in the URL
-    // below with "westus".
-    //
-    // Free trial subscription keys are generated in the "westus" region.
-    // If you use a free trial subscription key, you shouldn't need to change
-    // this region.
-    var uriBase =
-        "https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect";
-
-    // Request parameters.
-    var params = {
-        "returnFaceId": "true",
-        "returnFaceLandmarks": "false",
-        "returnFaceAttributes":
-            "age,gender,smile,facialHair,glasses,emotion,hair,makeup"
-    };
-
-    // Display the image.
-    var sourceImageUrl = document.getElementById("inputImage").value;
-    // document.querySelector("#sourceImage").src = sourceImageUrl;
-
-    $.ajax({
-        url: "http://localhost:5000/",
-        type: "get",
-        // Request body.
-        data: "",
-    })
-    .done(function(data) {
-        // Show formatted JSON on webpage.
-        console.log(data)
-    });
-
-
-
-
-    // Perform the REST API call.
-    $.ajax({
-        url: uriBase + "?" + $.param(params),
-
-        // Request headers.
-        beforeSend: function(xhrObj){
-            xhrObj.setRequestHeader("Content-Type","application/json");
-            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
-        },
-
-        type: "POST",
-
-        // Request body.
-        data: '{"url": ' + '"' + sourceImageUrl + '"}',
-    })
-    .done(function(data) {
-        // Show formatted JSON on webpage.
-        var i;
-        json = "";
-        for (i = 0; i < data.length; i++) {
-            json += data[i]["faceAttributes"];
-        }
-        $("#responseTextArea").val(JSON.stringify(json, null, 2));
-    })
+function myfunc(){
+    // console.log(localStorage["link"])
+    // document.getElementById("outputdiv").innerHTML = `anger:${localStorage["anger"]}`+ "<br>"+ `contempt:${localStorage["contempt"]}`+ "<br>" + `disgust:${localStorage["disgust"]}`;
+    document.getElementById("outputdiv").innerHTML = localStorage["jsondata"] + JSON.parse(localStorage["jsondata"])["emotion"]["anger"]
     
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        // Display error message.
-        var errorString = (errorThrown === "") ?
-            "Error. " : errorThrown + " (" + jqXHR.status + "): ";
-        errorString += (jqXHR.responseText === "") ?
-            "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
-                jQuery.parseJSON(jqXHR.responseText).message :
-                    jQuery.parseJSON(jqXHR.responseText).error.message;
-        alert(errorString);
-    });
-};
+    // console.log(JSON.stringify(localStorage["jsondata"]))
+    // document.getElementById("outputdiv").innerHTML =  "anger:" + localStorage["anger"];
+    // document.getElementById("outputdiv").innerHTML = localStorage["disgust"];
+    // console.log(localStorage["anger"])
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    var analyse = document.getElementById('analyse_button');
-    analyse.addEventListener('click', function() {
-        processImage();
-    })
-});
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('button').addEventListener('click', myfunc);
+  });
+
+// document.getElementById("outputdiv").innerHTML = localStorage["link"];
+
+// var outputdiv = document.getElementById("outputdiv")
+// outputdiv.innerHTML = localStorage["anger"];
