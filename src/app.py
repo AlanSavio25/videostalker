@@ -3,14 +3,15 @@ import main
 import videoframes
 import time
 from time import sleep
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route("/average", methods = ['GET', 'POST'])
 def average():
   print("Video frames ready")
   print("Starting averaging...")
-  filenames = main.loopdir("C:/Users/alans/Desktop/MicrosoftAzure/videostalker/src")
+  filenames = main.loopdir("C:/Users/alans/Desktop/MicrosoftAzure/videostalker/src/frames")
   vals = main.connectToFaceAPI('b8ea8ee7334149cebd7ed530acdf84d7')
 
   data = []
@@ -34,13 +35,14 @@ def average():
 @app.route("/videoframe", methods = ['GET', 'POST'])
 def videoframe():
   if request.method == 'GET':
-    # videoframes.frameCapture("https://www.youtube.com/watch?v=wjIes1eGAw4")
+    videoframes.frameCapture("https://www.youtube.com/watch?v=wjIes1eGAw4")
     return redirect('/average')
   if request.method == 'POST':
     s = ("Your POST request is: " + str(request.data))
     url = request.args['link']
     print("URL is: " + url)
     videoframes.frameCapture(url)
+    print("Successfully created video frames, starting averaging..")
     return redirect('/average')
 
 if __name__ == "__main__":
