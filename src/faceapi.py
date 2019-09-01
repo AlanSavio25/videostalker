@@ -47,12 +47,15 @@ def getFaceResponse(face_api_url, image, headers, params):
 vals = connectToFaceAPI('b8ea8ee7334149cebd7ed530acdf84d7')
 
 data = []
-
+totalData = []
 for file in filenames:
     faces = getFaceResponse(
         'https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect', file, vals[0], vals[1])
     data.append(faces)
     time.sleep(3)
+for i in data:
+    picdata = frameAverage(i)
+    totalData.append(picdata)
 
 # print(data)
 
@@ -121,11 +124,7 @@ def writeJsonDatatoFile(jsonData):
         json.dump(jsonData, outfile)
 
 
-totalData = []
 
-for i in data:
-    picdata = frameAverage(i)
-    totalData.append(picdata)
 
 # print(totalData)
 def overallAverage(faces):
@@ -187,8 +186,8 @@ def overallAverage(faces):
     return jsonData
 
 
-j = overallAverage(totalData)
+# j = overallAverage(totalData)
 
-print(j)
+# print(j)
 
 
