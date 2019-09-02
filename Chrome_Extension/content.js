@@ -1,18 +1,26 @@
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      if( request.message === "clicked_browser_action" ) {
-        var firstHref = $("a[href^='http']").eq(0).attr("href");
-  
-        console.log(firstHref);
-        chrome.runtime.sendMessage({"message": "open_new_tab", "url": firstHref});
-      }
-    }
-  );
+var youtubelink = window.location.toString()
+console.log(youtubelink)
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      if( request.message === "open_new_tab" ) {
-        chrome.tabs.create({"url": request.url});
-      }
-    }
-  );
+var data = {}
+$.ajax({
+  url: "http://127.0.0.1:5000/videoframe" + "?link=" + youtubelink,
+  data : youtubelink,
+  type: "POST",  
+  success: function(res) {
+    console.log(res);
+    data = JSON.stringify(res)
+  },
+  async:false
+})
+
+
+// Send data to popup.js
+
+chrome.runtime.sendMessage({
+
+    jsondata : data
+    
+  });
+
+
+

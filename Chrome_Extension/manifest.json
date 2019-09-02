@@ -4,19 +4,23 @@
     "description": "",
     "manifest_version": 2,
     "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "scripts": ["background.js"]
       },
     "browser_action": {        
-        "default_popup": "popup.html"
+        "default_icon":"analytics.png",
+        "default_popup":"popup.html"
       },
-    "permissions": ["storage"],
+    "permissions": ["storage",
+      "activeTab",
+      "tabs",
+      "http://127.0.0.1:5000/*"],
+
     "content_scripts": [
         {
           "matches": [
-            "<all_urls>"
+            "https://www.youtube.com/w*"
           ],
-          "js": ["jquery-3.4.1.min.js", "content.js"]
+          "js": ["jquery-3.4.1.min.js", "content.js","popup.js"]
         }
       ]
 }
