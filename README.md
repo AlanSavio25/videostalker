@@ -1,1 +1,1 @@
-![Image1](src/Image1.jpg)
+![Image1](src/Image1.JPG)
