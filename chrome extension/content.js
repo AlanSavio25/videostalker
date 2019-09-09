@@ -16,4 +16,3 @@ $.ajax({
   window.localStorage.setItem('jsonstring', data);
  })
 
-
