@@ -15,10 +15,6 @@ def frameCapture(url):
         print("Update: File exists- " + str(os.path.exists(dir)))
     os.makedirs(dir)
 
-        
-        
-
-
     video = pafy.new(url)
     best = video.getbest(preftype="mp4")
     capture = cv2.VideoCapture()

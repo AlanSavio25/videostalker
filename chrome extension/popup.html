@@ -1,37 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-  <div> hello </div>
-  <div id="outputdiv"></div>
-
-  <script src="popup.js"></script>
-
-  <title>Click It.</title>
-  
-  <style type="text/css">
-    .button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 30px 30px;
-      text-align: center;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .button:hover {
-      background-color: green;
-    }
-  </style>
+  <head>
+    <title>Video Stalker
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Italianno&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 </head>
+  <body style="height: 600px; width: 400px">
+    <header style="font-family: 'Italianno', cursive; font-size: 32px"><b>My  <img src="analytics.png" height="100%">  Stats </b></header>
+      <!-- <div class="container-fluid main">
 
-<body>
+     </div> -->
+         <div style="background-color: #f9f9f9; height:100%;" role="main" style="width:400px;">
+          <div style= "margin-top: 30px; box-shadow: 0 12px 16px -10px black; background-color: white; margin-left: 30px; margin-right: 30px; padding: 8px 5px">
+            <span class="card" id="number0" style="font-family: 'Montserrat', sans-serif;">We've carefully analyzed <b>every</b> Youtube video you've watched just for you to know some of these statistics..</span>
+            <span class="card" id="number1" style="font-family: 'Montserrat', sans-serif;">Looks like you're quite fond of people with </span>
+            <span class="card" id="number2" style="font-family: 'Montserrat', sans-serif;">You seem to be interested in watching people around the age </span>
+            <!-- <span class="card" id="number3">I'm on Chart 3</span> -->
+            <!-- <span class="card" id="number4">I'm on Chart 4</span> -->
+         <!--  -->
+            <br><br>
+          </div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="box-shadow: 0 12px 16px -10px black;">
+               
+               
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                  <!-- <li data-target="#carousel-example-generic" data-slide-to="3"></li> -->
+                  <!-- <li data-target="#carousel-example-generic" data-slide-to="4"></li> -->
 
-  <h2>Video Stalker</h2>
+                </ol>
+              
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="active item">
+                    <div id="chartContainer1" class="chart" style="width:100%; height:250px"></div>
+                  </div>
+                  <div class="item">
+                    <div id="chartContainer2" class="chart" style="width:100%; height:250px;"></div>
+                  </div>
+                  <div class="item">
+                    <div id="chartContainer3" class="chart" style="width:100%; height:250px;"></div>
+                  </div>
+                  <!-- <div class="item">
+                    <div id="chartContainer4" class="chart" style="width:100%; height:250px;"></div>
+                  </div>
+                  <div class="item">
+                    <div id="chartContainer5" class="chart" style="width:100%; height:250px;"></div>
+                  </div> -->
+                </div>
+              
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </div>
+              
+        </div>
+    <footer >
+            <div class="icon-bar">
+                <a class="active" href="#"><i class="fa fa-home" style="color:#003B59;"></i></a> 
+                <a href="#"><i class="fa fa-envelope" style="color:#003B59;"></i></a> 
+                <a href="#"><i class="fa fa-cog" style="color:#003B59;"></i></a> 
+              </div>
 
-  <button id="mybutton" class="button">Click me</button>
-
-</body>
+    </footer>
+        <script src="jquery2.2.3.js"></script>
+        <script  type="text/javascript"  src="bootstrap.min.js"></script>
+        <script type="text/javascript" src="canvasjs.min.js"></script>
+        <script src="popup.js"></script>
+  </body>
 
 </html>

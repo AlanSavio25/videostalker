@@ -62,7 +62,7 @@ def frameAverage(faces):
 		}
 	jsonData['facialHair'] = {'beard': 0.0, 'moustache': 0.0, 'sideburns': 0.0}
 	jsonData['hair'] = {'bald': 0.0, 'hairColor': '' }
-
+    
 	age = 0
 	smile = 0
 	# pprint(faces)
@@ -101,7 +101,9 @@ def overallAverage(faces):
         'surprise': 0.0
     }
     jsonData['facialHair'] = {'beard': 0.0, 'moustache': 0.0, 'sideburns': 0.0}
-    jsonData['hair'] = {'bald': 0.0, 'hairColor': ''}
+    jsonData['age'] = 0
+    jsonData['smile'] = 0
+    jsonData['hair'] = {'bald': 0.0, 'hairColor': 0.0}
 
     age = 0
     smile = 0
