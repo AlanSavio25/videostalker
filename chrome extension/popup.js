@@ -1,82 +1,116 @@
-function processImage() {
-    // Replace <Subscription Key> with your valid subscription key.
-    var subscriptionKey = "b8ea8ee7334149cebd7ed530acdf84d7";
+var chart;
+var charts = [];
+var width;
+var height;
+var js = JSON.parse(localStorage["jsondata"])
+em = js.emotion
+emotionSum = 0.00
+for (var key in em) {
+    emotionSum += em[key]
+}
 
-    // NOTE: You must use the same region in your REST call as you used to
-    // obtain your subscription keys. For example, if you obtained your
-    // subscription keys from westus, replace "westcentralus" in the URL
-    // below with "westus".
-    //
-    // Free trial subscription keys are generated in the "westus" region.
-    // If you use a free trial subscription key, you shouldn't need to change
-    // this region.
-    var uriBase =
-        "https://faceapi-alan.cognitiveservices.azure.com/face/v1.0/detect";
+var classNumber = 0
+document.getElementById("number1").style.display = "none";
+document.getElementById("number2").style.display = "none";
+// document.getElementById("number3").style.display = "none";
+// document.getElementById("number4").style.display = "none";
+var fav = "beard";
+if(js.facialHair.sideburns>js.facialHair.moustache && js.facialHair.sideburns>js.facialHair.beard){ fav = "sideburns" }
+else if(js.facialHair.moustache>js.facialHair.sideburns && js.facialHair.moustache>js.facialHair.beard){ fav = "moustache" }
 
-    // Request parameters.
-    var params = {
-        "returnFaceId": "true",
-        "returnFaceLandmarks": "false",
-        "returnFaceAttributes":
-            "age,gender,smile,facialHair,glasses,emotion,hair,makeup"
-    };
-
-    // Display the image.
-    var sourceImageUrl = document.getElementById("inputImage").value;
-    // document.querySelector("#sourceImage").src = sourceImageUrl;
-
-    $.ajax({
-        url: "http://localhost:5000/",
-        type: "get",
-        // Request body.
-        data: "",
-    })
-    .done(function(data) {
-        // Show formatted JSON on webpage.
-        console.log(data)
-    });
+document.getElementById("number1").innerHTML += "<b>" + fav + "</b>" + "!!";
+document.getElementById("number2").innerHTML += parseInt(js.age) + "!!";
 
 
 
+$('.carousel-control.left').click(function() {
+  document.getElementById("number"+classNumber).style.display = "none";
+  classNumber += -1
+  if(classNumber==-1){
+    classNumber = 2
+  }
+  console.log(classNumber)
+  document.getElementById("number"+classNumber).style.display = "block";  
+});
 
-    // Perform the REST API call.
-    $.ajax({
-        url: uriBase + "?" + $.param(params),
+$('.carousel-control.right').click(function() {
+  document.getElementById("number"+classNumber).style.display = "none";
+  classNumber += 1
+  if(classNumber==3){
+    classNumber = 0
+  }
+  console.log(classNumber)
+  document.getElementById("number"+classNumber).style.display = "block";  
+});
 
-        // Request headers.
-        beforeSend: function(xhrObj){
-            xhrObj.setRequestHeader("Content-Type","application/json");
-            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
-        },
+width = $('#carousel-example-generic').width();
+height = $('#carousel-example-generic').height();
+$('.carousel').carousel({
+  interval: false,
+});
+chart = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+	title: {
+		text: "Emotions"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: parseFloat(em.anger/emotionSum), label: "Anger"},
+			{y: parseFloat(em.contempt/emotionSum), label: "Contempt"},
+			{y: parseFloat(em.disgust/emotionSum), label: "Disgust"},
+			{y: parseFloat(em.fear/emotionSum), label: "Fear"},
+      {y: parseFloat(em.sadness/emotionSum), label: "Sadness"},
+      {y: parseFloat(em.surprise/emotionSum), label: "Surprise"},
+      {y: parseFloat(em.happiness/emotionSum), label: "Happiness"},
+      {y: parseFloat(em.neutral/emotionSum), label: "Neutral"}
+		]
+	}]
+});
+chart.render();
+charts.push(chart);
 
-        type: "POST",
+chart = new CanvasJS.Chart("chartContainer2", {
+  title: {
+    text: "Most Appearing Facial Hair in the Videos You watch"
+  },
+  width: width,
+  height: height,
+  data: [{
+    type: "column",
+    dataPoints: [{ y: js.facialHair.beard*100, label: "Beard" },
+    { y: js.facialHair.moustache*100,  label: "Moustache" },
+    { y: js.facialHair.sideburns*100,  label: "Sideburns" }]
+  }]
+});
+chart.render();
+charts.push(chart);
 
-        // Request body.
-        data: '{"url": ' + '"' + sourceImageUrl + '"}',
-    })
-    .done(function(data) {
-        // Show formatted JSON on webpage.
-        var i;
-        json = "";
-        for (i = 0; i < data.length; i++) {
-            json += data[i]["faceAttributes"];
-        }
-        $("#responseTextArea").val(JSON.stringify(json, null, 2));
-    })
-    
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        // Display error message.
-        var errorString = (errorThrown === "") ?
-            "Error. " : errorThrown + " (" + jqXHR.status + "): ";
-        errorString += (jqXHR.responseText === "") ?
-            "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
-                jQuery.parseJSON(jqXHR.responseText).message :
-                    jQuery.parseJSON(jqXHR.responseText).error.message;
-        alert(errorString);
-    });
-};
+chart = new CanvasJS.Chart("chartContainer3", {
+  title: {
+    text: "Like to know how old the people you view most often are?"
+  },
+  width: width,
+  height: height,
+  data: [{
+    type: "bar",
+    color: "#014D65",
+		axisYType: "secondary",
+    dataPoints: [
+      { y: js.age, label: "Age" }
+      ]
+  }]
+});
+chart.render();
+charts.push(chart);
 
-document.addEventListener('DOMContentLoaded', function() {
-    var analyse = document.getElementById('analyse_button');
-   
+$(window).resize(function() {
+  for (var i = 0; i < charts.length; i++) {
+    charts[i].options.width = $('.carousel').width();
+    charts[i].options.height = $('.carousel').height();
+    charts[i].render();
+  }
 });

@@ -17,8 +17,12 @@
   "permissions": [
    "activeTab",
    "http://localhost/*",
-   "tabs"
+   "tabs",
+   "notifications"
    ],
+   "web_accessible_resources": [
+    "analytics.png"
+  ],
   "content_scripts": [
   {
     "matches": [
